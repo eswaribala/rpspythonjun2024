@@ -1,5 +1,5 @@
 docker network create intel
-docker run --name intel-mysql  --network intel -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=ecommercedb -e MYSQL_USER=demo_user -e MYSQL_PASSWORD=demo_pass -d mysql
+docker run --name intel-mysql  -p3308:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=ecommercedb -e MYSQL_USER=demo_user -e MYSQL_PASSWORD=demo_pass -d mysql
 #to check mysql client
 docker exec -it 87c18788c394 bash
 mysql -p
