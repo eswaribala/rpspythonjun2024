@@ -1,13 +1,20 @@
 import sqlite3
 
-#import PyMYSQL
-
-
-# def createconn():
-#      conn = pymysql.connect(host="127.0.0.1", port=3307, user="root", passwd="password", db="ecommercedb")
-#      return conn
+import mysql.connector
 #
-# createconn()
+#
+def createconn():
+    conn = mysql.connector.connect(host="localhost",
+                                   user='root',
+                                   password='vignesh',
+                                   database='bankingdb',
+                                   auth_plugin='mysql_native_password')
+
+    c = conn.cursor()
+    return c, conn
+
+
+createconn()
 
 
 class MetaSingleton(type):
