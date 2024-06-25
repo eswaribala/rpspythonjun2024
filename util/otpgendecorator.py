@@ -15,10 +15,12 @@ def otp(name):
 
     return guess
 
-#decorator
+
+# decorator
+#flexibility plug and play
 @otp('Generate OTP')
 def invokeotpgen(range):
-    #step 4
+    # step 4
     print(random.randrange(range))
 
 
