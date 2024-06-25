@@ -10,8 +10,6 @@ name = "Parameswari"
 # equivalent in iterator
 iterated_name = iter(name)
 print(next(iterated_name))
-print(next(iterated_name))
-print(next(iterated_name))
 
 
 class Iterator_:
