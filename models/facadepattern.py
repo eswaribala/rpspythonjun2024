@@ -3,7 +3,6 @@ class Supplier:
     def isAccessible(self):
         print("Supplier Available")
 
-
 class Delivery:
     def isAccessible(self):
         print("Delivery System Available")
