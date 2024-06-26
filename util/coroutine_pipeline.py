@@ -9,7 +9,7 @@ def source_code(next_coroutine=None):
             url = (yield)
             res = requests.get(url)
             response = json.loads(res.text)
-            print(response)
+            #print(response)
             next_coroutine.send(response)
     except GeneratorExit:
         print("Done with Source Code Fetching!!")
@@ -22,9 +22,9 @@ def build(next_coroutine):
         while True:
             response = (yield)
             for object in response:
-                print(object["name"], object["email"], object["address"])
-                filtered_data.append(object["name"]+","+object["email"]+","+object["address"])
-                next_coroutine.send(filtered_data)
+               # print(object["name"], object["email"], object["address"])
+                filtered_data.append(str(object["name"])+","+str(object["email"])+","+str(object["address"]))
+            next_coroutine.send(filtered_data)
     except GeneratorExit:
         print("Done with Build!!")
         next_coroutine.close()
