@@ -3,9 +3,9 @@ import json
 import threading
 
 response = "Test"
-def source_code():
+def source_code(url):
     global response
-    res = requests.get("https://jsonplaceholder.typicode.com/users")
+    res = requests.get(url)
     response = json.loads(res.text)
     print(response)
 
@@ -26,6 +26,6 @@ def source_code():
 #         names.append(namearray[0])
 
 
-thread1 = threading.Thread(name="source_code", target=source_code)
+thread1 = threading.Thread(name="source_code", target=source_code, args=("https://jsonplaceholder.typicode.com/users",))
 thread1.start()
 
