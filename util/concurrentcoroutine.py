@@ -7,8 +7,10 @@ import requests
 import logging
 
 logfile = open('logfile', 'w')
-logging.basicConfig(filename="api.log", format="%(asctime)s %(message)s",filemode='w')
-logger=logging.getLogger()
+logging.basicConfig(filename="api.log",  filemode='w')
+logger = logging.getLogger()
+
+
 async def fetch(url):
     print("Fetching %s" % (url))
     response_text = requests.get(url)
