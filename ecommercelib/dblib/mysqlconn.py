@@ -1,20 +1,19 @@
 import sqlite3
 
 import mysql.connector
+
+
 #
 #
 def createconn():
-    conn = mysql.connector.connect(host="localhost",
+    conn = mysql.connector.connect(host="127.0.0.1", port=3308,
                                    user='root',
-                                   password='vignesh',
-                                   database='bankingdb',
+                                   password='password',
+                                   database='ecommercedb',
                                    auth_plugin='mysql_native_password')
 
     c = conn.cursor()
     return c, conn
-
-
-createconn()
 
 
 class MetaSingleton(type):
@@ -28,12 +27,15 @@ class MetaSingleton(type):
 
 class Database(metaclass=MetaSingleton):
     connection = None
+    cursor = None
 
     def connect(self):
         if self.connection is None:
-            self.connection = sqlite3.connect("db.sqlite3")
-            self.cursorobj = self.connection.cursor()
-        return self.cursorobj
+            self.cursor, self.connection = createconn()
+            print (self.connection)
+            # creating database
+            #self.cursor.execute("CREATE DATABASE testdb")
+        return self.cursor
 
 
 db1 = Database().connect()
