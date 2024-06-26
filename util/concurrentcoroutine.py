@@ -5,13 +5,16 @@ from asyncio import sleep
 
 import requests
 import logging
-logfile=open('logfile','w')
+
+logfile = open('logfile', 'w')
+logging.basicConfig(filename="api.log", format="%(asctime)s %(message)s",filemode='w')
+logger=logging.getLogger()
 async def fetch(url):
-    print("Fetching %s" %(url))
+    print("Fetching %s" % (url))
     response_text = requests.get(url)
     json_data = json.loads(response_text.text)
     await sleep(1)
-    logging.info(json_data)
+    logger.info(json.dumps(json_data))
     logfile.write(json.dumps(json_data))
 
 
