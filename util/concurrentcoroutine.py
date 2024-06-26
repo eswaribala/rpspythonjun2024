@@ -7,7 +7,11 @@ import requests
 import logging
 
 logfile = open('logfile', 'w')
-logging.basicConfig(filename="api.log",  filemode='w')
+logging.basicConfig(
+    filename="api.log",
+    level=logging.INFO,
+    format='[%(levelname)s] (%(threadName)-10s) %(message)s',
+)
 logger = logging.getLogger()
 
 
