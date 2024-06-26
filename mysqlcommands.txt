@@ -4,3 +4,7 @@ docker run --name intel-mysql  -p3308:3306 -e MYSQL_ROOT_PASSWORD=password -e MY
 docker exec -it 87c18788c394 bash
 mysql -p
 show databases;
+
+
+#add the library
+python -m pip install mysql-connector-python
