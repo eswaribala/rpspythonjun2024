@@ -2,7 +2,6 @@ import sqlite3
 
 import mysql.connector
 
-
 #
 #
 def createconn():
@@ -32,9 +31,9 @@ class Database(metaclass=MetaSingleton):
     def connect(self):
         if self.connection is None:
             self.cursor, self.connection = createconn()
-            print (self.connection)
+            print(self.connection)
             # creating database
-            #self.cursor.execute("CREATE DATABASE testdb")
+            #self.cursor.execute("CREATE DATABASE customerdb")
         return self.cursor
 
 
