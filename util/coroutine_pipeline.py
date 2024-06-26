@@ -1,12 +1,14 @@
 import json
 
 import requests
+
+
 def source_code(next_coroutine=None):
     try:
         while True:
             url = (yield)
             res = requests.get(url)
-            response=json.loads(res.text)
+            response = json.loads(res.text)
             print(response)
             next_coroutine.send(response)
     except GeneratorExit:
@@ -15,10 +17,14 @@ def source_code(next_coroutine=None):
 
 
 def build(next_coroutine):
+    filtered_data = []
     try:
         while True:
             response = (yield)
-            next_coroutine.send(response)
+            for object in response:
+                print(object["name"], object["email"], object["address"])
+                filtered_data.append(object["name"]+","+object["email"]+","+object["address"])
+                next_coroutine.send(filtered_data)
     except GeneratorExit:
         print("Done with Build!!")
         next_coroutine.close()
@@ -27,8 +33,8 @@ def build(next_coroutine):
 def unit_test(next_coroutine):
     try:
         while True:
-            url = (yield)
-            next_coroutine.send(url)
+            filtered_data = (yield)
+            next_coroutine.send(filtered_data)
     except GeneratorExit:
         print("Done with Unit Testing!!")
         next_coroutine.close()
