@@ -9,7 +9,7 @@ def source_code(next_coroutine=None):
             url = (yield)
             res = requests.get(url)
             response = json.loads(res.text)
-            #print(response)
+            # print(response)
             next_coroutine.send(response)
     except GeneratorExit:
         print("Done with Source Code Fetching!!")
@@ -22,8 +22,8 @@ def build(next_coroutine):
         while True:
             response = (yield)
             for object in response:
-               # print(object["name"], object["email"], object["address"])
-                filtered_data.append(str(object["name"])+","+str(object["email"])+","+str(object["address"]))
+                # print(object["name"], object["email"], object["address"])
+                filtered_data.append(str(object["name"]) + "," + str(object["email"]) + "," + str(object["address"]))
             next_coroutine.send(filtered_data)
     except GeneratorExit:
         print("Done with Build!!")
@@ -31,14 +31,14 @@ def build(next_coroutine):
 
 
 def unit_test(next_coroutine):
-    names=[]
+    names = []
     try:
         while True:
             filtered_data = (yield)
-            #print(filtered_data)
+            # print(filtered_data)
             for _ in filtered_data:
-                #print (_,end="\n")
-                namearray=_.split(",")
+                # print (_,end="\n")
+                namearray = _.split(",")
                 names.append(namearray[0])
             next_coroutine.send(names)
     except GeneratorExit:
@@ -71,7 +71,7 @@ def deployment():
     try:
         while True:
             url = (yield)
-            #print(url)
+            # print(url)
     except GeneratorExit:
         print("Done with Deployment!!")
 
