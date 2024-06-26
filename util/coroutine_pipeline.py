@@ -1,8 +1,14 @@
+import json
+
+import requests
 def source_code(next_coroutine=None):
     try:
         while True:
             url = (yield)
-            next_coroutine.send(url)
+            res = requests.get(url)
+            response=json.loads(res.text)
+            print(response)
+            next_coroutine.send(response)
     except GeneratorExit:
         print("Done with Source Code Fetching!!")
         next_coroutine.close()
@@ -11,8 +17,8 @@ def source_code(next_coroutine=None):
 def build(next_coroutine):
     try:
         while True:
-            url = (yield)
-            next_coroutine.send(url)
+            response = (yield)
+            next_coroutine.send(response)
     except GeneratorExit:
         print("Done with Build!!")
         next_coroutine.close()
@@ -65,15 +71,15 @@ def trigger_pipeline(url, next_coroutine):
 # coroutine pipeline
 pipeline = deployment()
 pipeline.__next__()
-pipeline = e2e_test(next_coroutine = pipeline)
+pipeline = e2e_test(next_coroutine=pipeline)
 pipeline.__next__()
-pipeline = integrate(next_coroutine = pipeline)
+pipeline = integrate(next_coroutine=pipeline)
 pipeline.__next__()
-pipeline = unit_test(next_coroutine = pipeline)
+pipeline = unit_test(next_coroutine=pipeline)
 pipeline.__next__()
-pipeline = build(next_coroutine = pipeline)
+pipeline = build(next_coroutine=pipeline)
 pipeline.__next__()
-pipeline = source_code(next_coroutine = pipeline)
+pipeline = source_code(next_coroutine=pipeline)
 pipeline.__next__()
 
 url = input("Enter Source code url")
