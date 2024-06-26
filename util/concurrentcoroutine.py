@@ -4,14 +4,15 @@ import time
 from asyncio import sleep
 
 import requests
-
-
+import logging
+logfile=open('logfile','w')
 async def fetch(url):
     print("Fetching %s" %(url))
     response_text = requests.get(url)
     json_data = json.loads(response_text.text)
     await sleep(1)
-    print(json_data)
+    logging.info(json_data)
+    logfile.write(json.dumps(json_data))
 
 
 async def main():
