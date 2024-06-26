@@ -31,10 +31,16 @@ def build(next_coroutine):
 
 
 def unit_test(next_coroutine):
+    names=[]
     try:
         while True:
             filtered_data = (yield)
-            next_coroutine.send(filtered_data)
+            #print(filtered_data)
+            for _ in filtered_data:
+                #print (_,end="\n")
+                namearray=_.split(",")
+                names.append(namearray[0])
+            next_coroutine.send(names)
     except GeneratorExit:
         print("Done with Unit Testing!!")
         next_coroutine.close()
@@ -43,8 +49,9 @@ def unit_test(next_coroutine):
 def integrate(next_coroutine):
     try:
         while True:
-            url = (yield)
-            next_coroutine.send(url)
+            names = (yield)
+            print(names)
+            next_coroutine.send(names)
     except GeneratorExit:
         print("Done with Integration!!")
         next_coroutine.close()
@@ -64,7 +71,7 @@ def deployment():
     try:
         while True:
             url = (yield)
-            print(url)
+            #print(url)
     except GeneratorExit:
         print("Done with Deployment!!")
 
