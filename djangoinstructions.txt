@@ -1,17 +1,17 @@
 
 
 To create Django project
-mkdir food_api
-cd food_api
+mkdir invenory
+cd inventory
 
 python.exe -m pip install --upgrade pip 
 
-python -m venv env
-use pycharm
- settings tools terminal
-make shell path windows cmd C:\Windows\system32\cmd.exe
+#python -m venv env
+#use pycharm
+ #settings tools terminal
+#make shell path windows cmd C:\Windows\system32\cmd.exe
 
-check activate virtualenv
+#check activate virtualenv
 
 
 python -m pip install django djangorestframework mysqlclient
