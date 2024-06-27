@@ -1,7 +1,7 @@
 
 
 To create Django project
-mkdir invenory
+mkdir inventory
 cd inventory
 
 python.exe -m pip install --upgrade pip 
