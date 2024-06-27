@@ -1,10 +1,8 @@
 from time import sleep
-
 import requests
 import json
 from threading import Thread
 
-response = "Test"
 
 
 class Source_Code(Thread):
