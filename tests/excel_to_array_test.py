@@ -1,5 +1,7 @@
+import math
 import unittest
 from ecommercelib.userlib import arrayfromexcel as lib
+from parameterized import parameterized
 
 
 class Excel_To_Array_Testing(unittest.TestCase):
@@ -14,7 +16,14 @@ class Excel_To_Array_Testing(unittest.TestCase):
         data = lib.gendata(start_row, end_row, col,
                            filepath=file_path,
                            sheetname="GDP")
-        self.assertTrue(data.count() > 0)
+        self.assertTrue(len(data) > 0)
+
+    @parameterized.expand([
+        ("negative", -1.5, -2.0),
+        ("integer", 1, 1.0)
+    ])
+    def test_trainee_results(self, name,input, expected):
+        self.assertEquals(math.floor(input), expected)
 
     def tearDown(self):
         pass
