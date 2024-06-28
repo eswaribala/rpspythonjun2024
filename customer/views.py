@@ -95,3 +95,8 @@ def stock_parameterized_data(request, pk):
     elif request.method == 'DELETE':
         stock.delete()
         return Response(data={'Stock Deleted Successfully'}, status=200)
+
+
+# web application
+def add_stock(request):
+    return render(request, 'add_stock.html')

@@ -20,7 +20,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
-from customer.views import stock_list, stock_parameterized_data
+from customer.views import stock_list, stock_parameterized_data, add_stock
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -33,5 +33,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('stocks/', stock_list),
     path('stocks/v1.0/<int:pk>/', stock_parameterized_data),
+    path('add/', add_stock, name='add_stock'),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
 ]
