@@ -20,8 +20,8 @@ from customer.serializers import StockSerializer
             'id': openapi.Schema(type=openapi.TYPE_NUMBER),
             'name': openapi.Schema(type=openapi.TYPE_STRING),
             'type': openapi.Schema(type=openapi.TYPE_STRING),
-            'price': openapi.Schema(type=openapi.TYPE_STRING),
-            'qty': openapi.Schema(type=openapi.TYPE_STRING),
+            'price': openapi.Schema(type=openapi.TYPE_NUMBER),
+            'qty': openapi.Schema(type=openapi.TYPE_NUMBER),
             'price_trending_date': openapi.Schema(type=openapi.TYPE_STRING, default='yyyy-mm-dd'),
             # 'end_date': openapi.Schema(type=openapi.TYPE_STRING, default='yyyy-mm-dd'),
 
@@ -48,3 +48,51 @@ def stock_list(request):
             }
             return Response(response_data, status=201)
         return Response(serializer.errors, status=400)
+
+
+@swagger_auto_schema(
+    methods=['put'],
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        required=['accountNo', 'firstName', 'middleName', 'lastName', 'contactNo', 'email', 'password'],
+        properties={
+            'accountNo': openapi.Schema(type=openapi.TYPE_NUMBER),
+            'firstName': openapi.Schema(type=openapi.TYPE_STRING),
+            'middleName': openapi.Schema(type=openapi.TYPE_STRING),
+            'lastName': openapi.Schema(type=openapi.TYPE_STRING),
+            'contactNo': openapi.Schema(type=openapi.TYPE_NUMBER),
+            'email': openapi.Schema(type=openapi.TYPE_STRING),
+            'password': openapi.Schema(type=openapi.TYPE_STRING),
+            # 'end_date': openapi.Schema(type=openapi.TYPE_STRING, default='yyyy-mm-dd'),
+
+        },
+    ),
+    operation_description='Update Customer',
+    responses={200: ""}
+)
+@api_view(["GET", "PUT", "DELETE"])
+def stock_parameterized_data(request, pk):
+    try:
+        stock = Stock.objects.get(pk=pk)
+    except Stock.DoesNotExist:
+        return Response(data={'The stock does not exist'}, status=400)
+
+    if request.method == 'GET':
+        serializer = StockSerializer(stock)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = StockSerializer(stock, data=request.data)
+        if serializer.is_valid():
+            stock_obj = serializer.save()
+            # Customize the response for a successful creation
+            response_data = {
+                'message': 'Stock updated successfully!',
+                'data': serializer.data,
+            }
+            return Response(response_data, status=201)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        stock.delete()
+        return Response(data={'Stock Deleted Successfully'}, status=200)
