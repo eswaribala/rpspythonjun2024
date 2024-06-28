@@ -9,6 +9,14 @@ form{
     margin: 25%;
     margin-top: 5%;
 }
+fieldset{
+    border: 2px solid green;
+}
+legend{
+    text-align: center;
+    font-size: xx-large;
+}
+
 	/* Style inputs with type="text", select elements and textareas */
 input[type=text],[type=number], [type=password],select, textarea {
   width: 100%; /* Full width */
@@ -46,7 +54,9 @@ input[type=submit]:hover {
 </head>
 <body>
 <form method="post" action="">
-      {% csrf_token %}
+    {% csrf_token %}
+  <fieldset>
+      <legend>Stock Form</legend>
     <div>
         <label for="stock_id">Stock Id</label>
         <input id="stock_id" type="number" name="stock_id">
@@ -70,6 +80,7 @@ input[type=submit]:hover {
     <div>
         <input type="submit" value="Submit"/>
     </div>
+  </fieldset>
 </form>
 <datalist id="stock_types">
     <option>CPU_CHIP</option>
