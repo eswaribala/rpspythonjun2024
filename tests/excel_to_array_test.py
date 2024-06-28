@@ -20,10 +20,10 @@ class Excel_To_Array_Testing(unittest.TestCase):
 
     @parameterized.expand([
         ("negative", -1.5, -2.0),
-        ("integer", 1, 1.0)
+        ("integer", 1, 1.0),
     ])
     def test_trainee_results(self, name,input, expected):
-        self.assertEquals(math.floor(input), expected)
+        self.assertTrue(math.floor(input), expected)
 
     def tearDown(self):
         pass
