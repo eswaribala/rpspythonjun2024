@@ -54,15 +54,14 @@ def stock_list(request):
     methods=['put'],
     request_body=openapi.Schema(
         type=openapi.TYPE_OBJECT,
-        required=['accountNo', 'firstName', 'middleName', 'lastName', 'contactNo', 'email', 'password'],
+        required=['id', 'name', 'type', 'price', 'qty', ' price_trending_date'],
         properties={
-            'accountNo': openapi.Schema(type=openapi.TYPE_NUMBER),
-            'firstName': openapi.Schema(type=openapi.TYPE_STRING),
-            'middleName': openapi.Schema(type=openapi.TYPE_STRING),
-            'lastName': openapi.Schema(type=openapi.TYPE_STRING),
-            'contactNo': openapi.Schema(type=openapi.TYPE_NUMBER),
-            'email': openapi.Schema(type=openapi.TYPE_STRING),
-            'password': openapi.Schema(type=openapi.TYPE_STRING),
+            'id': openapi.Schema(type=openapi.TYPE_NUMBER),
+            'name': openapi.Schema(type=openapi.TYPE_STRING),
+            'type': openapi.Schema(type=openapi.TYPE_STRING),
+            'price': openapi.Schema(type=openapi.TYPE_NUMBER),
+            'qty': openapi.Schema(type=openapi.TYPE_NUMBER),
+            'price_trending_date': openapi.Schema(type=openapi.TYPE_STRING, default='yyyy-mm-dd'),
             # 'end_date': openapi.Schema(type=openapi.TYPE_STRING, default='yyyy-mm-dd'),
 
         },
