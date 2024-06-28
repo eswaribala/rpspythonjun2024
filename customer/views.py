@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -100,3 +101,20 @@ def stock_parameterized_data(request, pk):
 # web application
 def add_stock(request):
     return render(request, 'add_stock.html')
+
+
+def process_stock_entry(request):
+    if request.method == 'POST':
+        id = request.POST.get('stock_id')
+        name= request.POST.get('stock_name')
+        type = request.POST.get('stock_type')
+        qty = request.POST.get('qty')
+        price = request.POST.get('price')
+        price_trending_date=request.POST.get('trending_date')
+        # Create a new stock entry in the database using the Stock model
+        stock = Stock(id=id,name=name,type=type,qty=qty,price=price,price_trending_date=price_trending_date)
+        stock.save()
+
+        return HttpResponse("Data successfully inserted!")
+    else:
+        return HttpResponse("Invalid request method.")

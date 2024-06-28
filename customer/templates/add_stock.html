@@ -5,10 +5,9 @@
     <title>Title</title>
      {% load static %}
       <link href="{% static '/css/add.css' %}" rel="stylesheet">
-
 </head>
 <body>
-<form method="post" action="">
+<form method="post" action={% url 'process_stock_entry'  %}>
     {% csrf_token %}
   <fieldset>
       <legend>Stock Form</legend>
@@ -31,6 +30,10 @@
     <div>
         <label for="price">Price</label>
         <input id="price" type="number" name="price">
+    </div>
+      <div>
+        <label for="trending_date">Price Trending Date</label>
+        <input id="trending_date" type="date" name="trending_date" pattern="yyyy-mm-dd">
     </div>
     <div>
         <input type="submit" value="Submit"/>
