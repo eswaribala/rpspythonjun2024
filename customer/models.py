@@ -19,3 +19,4 @@ class Stock(models.Model):
     )
     qty = models.IntegerField(default=0)
     price_trending_date = models.DateField(null=True)
+
