@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'customer_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'inventorydb',
+        'NAME': 'stockdb',
         'USER': 'root',
         'PASSWORD': 'password',
         'HOST': '127.0.0.1',  # Use 'localhost' if the database is on the same machine
